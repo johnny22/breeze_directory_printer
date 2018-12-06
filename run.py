@@ -6,14 +6,13 @@ import json
 #import sys
 import cPickle as pickle
 #import pickle
-import get_people
-import get_person
+import get_details
 import family
 import generate_template
 
 
-TEST = True
-write = False
+TEST = False
+write = True
 ordered = True
 full_person_dict = {}
 
@@ -21,7 +20,7 @@ full_person_dict = {}
 def get_people_list():
     """One call"""
     print("Making first call ...")
-    list_of_people = get_people.get_people_list()
+    list_of_people = get_details.get_people_list()
     return list_of_people
 
 
@@ -43,7 +42,7 @@ def full_person_list(id_list):
         sys.stdout.write(out_text)
         sys.stdout.flush()
         #print ("working on number ", inc, " out of ", len(id_list))
-        person_details = get_person.get_person_details(person_id)
+        person_details = get_details.get_person_details(person_id)
         out_list.append(person_details)
         full_person_dict[person_id] = person_details
         inc += 1
@@ -175,6 +174,7 @@ family_list = get_family_list(full_person_list)
 object_list = family_object_list(family_list)
 if ordered:
     object_list = list_modifier(object_list)
+    sys.stdout.write('\r')
     print(str(len(object_list)) + " entries in directory")
 
 template_dict_list = template_dict_caller(object_list)
