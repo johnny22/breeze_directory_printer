@@ -1,5 +1,6 @@
 connect.py
 *.pyc
+*.swp
 Final_images/
 notes.txt
 ordered_out.html

@@ -11,7 +11,8 @@ import family
 import generate_template
 
 
-TEST = False
+
+READ_FROM_DISK= False
 write = True
 ordered = True
 full_person_dict = {}
@@ -150,7 +151,7 @@ def list_modifier(in_list):
     return final_out
 
 # For testing, use json_test, not actual list
-if not TEST:
+if not READ_FROM_DISK:
     people = get_people_list()
     list_of_ids = create_id_list(people)
     full_person_list = full_person_list(list_of_ids)
@@ -162,7 +163,7 @@ if not TEST:
             dict_out.write(pickle.dumps(full_person_dict))
 
 
-if TEST:
+if READ_FROM_DISK:
     print ("we are in reading from disk mode")
     with open('testing_dict_out.txt', 'r') as dict_in:
         full_person_dict = pickle.load(dict_in)
