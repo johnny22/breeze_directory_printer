@@ -44,7 +44,10 @@ def full_person_list(id_list):
         sys.stdout.write(out_text)
         sys.stdout.flush()
         #print ("working on number ", inc, " out of ", len(id_list))
-        person_details = get_details.get_person_details(person_id)
+        try:
+            person_details = get_details.get_person_details(person_id)
+        except:
+            print("There was a problem making the call to breeze")
         out_list.append(person_details)
         FULL_PERSON_DICT[person_id] = person_details
         inc += 1
