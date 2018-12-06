@@ -1,9 +1,7 @@
 """ This is the file to run to create a html directory ready for printing. """
 from __future__ import print_function
 import sys
-import os
 import json
-#import sys
 import cPickle as pickle
 #import pickle
 import get_details
@@ -12,17 +10,20 @@ import generate_template
 
 
 
-READ_FROM_DISK= False
-write = True
-ordered = True
-full_person_dict = {}
+READ_FROM_DISK = False
+WRITE = True
+ORDERED = True
+FULL_PERSON_DICT = {}
 
 
 def get_people_list():
     """One call"""
-    print("Making first call ...")
-    list_of_people = get_details.get_people_list()
-    return list_of_people
+    try:
+        print("Making first call ...")
+        list_of_people = get_details.get_people_list()
+        return list_of_people
+    except:
+        print("Looks like there is a problem with your connection to breeze, check connect.py")
 
 
 def create_id_list(json_people):
@@ -45,8 +46,9 @@ def full_person_list(id_list):
         #print ("working on number ", inc, " out of ", len(id_list))
         person_details = get_details.get_person_details(person_id)
         out_list.append(person_details)
-        full_person_dict[person_id] = person_details
+        FULL_PERSON_DICT[person_id] = person_details
         inc += 1
+    sys.stdout.write('\n')
     return out_list
 
 
@@ -94,11 +96,11 @@ def family_object_list(in_family_list):
     """One call for each familiy, and one for each person in family"""
     out_list = []
     for family_tuple in in_family_list:
-        family_json = full_person_dict[family_tuple[2]]
+        family_json = FULL_PERSON_DICT[family_tuple[2]]
         for person in family_json['family']:
             if person['role_name'] == 'Head of Household':
-                family_json = full_person_dict[person['person_id']]
-        out_family = family.family_details(family_json, full_person_dict)
+                family_json = FULL_PERSON_DICT[person['person_id']]
+        out_family = family.family_details(family_json, FULL_PERSON_DICT)
         out_list.append(out_family)
     out_list.sort(key=lambda person: person.last_name.lower())
     return out_list
@@ -156,26 +158,26 @@ if not READ_FROM_DISK:
     list_of_ids = create_id_list(people)
     full_person_list = full_person_list(list_of_ids)
 
-    if write:
+    if WRITE:
         with open('testing_out.json', 'w') as json_out:
             json.dump(full_person_list, json_out)
         with open('testing_dict_out.txt', 'w') as dict_out:
-            dict_out.write(pickle.dumps(full_person_dict))
+            dict_out.write(pickle.dumps(FULL_PERSON_DICT))
 
 
 if READ_FROM_DISK:
     print ("we are in reading from disk mode")
     with open('testing_dict_out.txt', 'r') as dict_in:
-        full_person_dict = pickle.load(dict_in)
+        FULL_PERSON_DICT = pickle.load(dict_in)
         with open('testing_out.json', 'r') as json_in:
             full_person_list = json.load(json_in)
 
 
 family_list = get_family_list(full_person_list)
 object_list = family_object_list(family_list)
-if ordered:
+if ORDERED:
     object_list = list_modifier(object_list)
-    sys.stdout.write('\r')
+    sys.stdout.flush()
     print(str(len(object_list)) + " entries in directory")
 
 template_dict_list = template_dict_caller(object_list)
@@ -186,7 +188,7 @@ pre_info = ('<!DOCTYPE html> \n <html> \n <link rel="stylesheet" type="text/css"
             ' href="./styles.css"> <body>')
 post_info = '</body></html>'
 final_output = pre_info + html_output + post_info
-if ordered:
+if ORDERED:
     with open('ordered_out.html', 'w') as out_html_file:
         out_html_file.write(final_output)
 else:

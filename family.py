@@ -84,7 +84,12 @@ class family_details(object):
     def add_member(self, new_member_id):
         """ adds tuple (personobj, ',' or '<br>) """
         #new_member = person(get_person.get_person_details(new_member_id))
-        new_member = person(self.full_person_dict[new_member_id])
+        try:
+            new_member = person(self.full_person_dict[new_member_id])
+        except KeyError:
+            print("You are looking for a person that is not in the dictionary "
+                    "that was made from the people details you downloaded")
+            return None
         if  new_member.role in ('1', '2', '47') or new_member.in_booklet:
             #self.member_list.append((new_member, var))
             self.member_list.append(new_member)
