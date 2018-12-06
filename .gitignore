@@ -1,0 +1,9 @@
+connect.py
+*.pyc
+Final_images/
+notes.txt
+ordered_out.html
+people.json
+person.json
+photo_resizer.py
+testing*

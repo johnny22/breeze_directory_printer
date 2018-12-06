@@ -1,0 +1,390 @@
+
+{% extends "page.html" %}
+{% block content %}
+
+<div class="left_box">
+    <div class="box box_left">
+    {% if person1 %}
+    <img src="{{person1.picture_path}}" class="photo">
+        <div class="inner_box">
+        <h class='names'>
+        {% if person1.different_names %}
+        {{person1.head_first_name}}
+        {{person1.last_name}}
+        {% for member in person1.member_list %}
+        {% if member.family_role == 'Spouse'%}
+        &#38 {{member.name}}
+        {{member.last_name}}
+        {% endif %}
+        {% endfor %}
+
+
+        {% else %}
+        {{person1.head_first_name}}
+        {% for member in person1.member_list %}
+        {% if member.family_role == 'Spouse' and member.name != person1.head_first_name%}
+        {% if person1.head_first_name != None %}
+        &#38 {{member.name}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {{person1.last_name}}
+        {% endif %}
+        {% for member in person1.member_list %}
+        {% if member.family_role == 'Child' or member.family_role == 'Adult' %}
+        {% if member.name != person1.head_first_name %}
+        {{return_print_var(person1.member_list, member)}}
+        {% endif %}
+        {% endif %}
+        {% endfor%} 
+        </h>
+        {% if person1.s_address %}
+        <br>
+        {{person1.s_address}} <br>
+        {{person1.city}}, {{person1.state}} {{person1.zipcode}}
+        {% endif %}
+        <br>
+        {% if person1.home_phone_number %}
+        {{person1.home_phone_number }} (Home)
+        <br>
+        {% endif %}
+        {% for member in person1.member_list %}
+        {% if member.phone_number or member.email %}
+        {% if len(person1.member_list) > 1 %}
+        <strong>
+        {{member.name}} <br>
+        </strong>
+        {% endif %}
+        {% if member.phone_number %}
+        {{member.phone_number}} <br>
+        {% endif %}
+        {% if member.email %}
+        {{member.email}} <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        </div> <!-- inner_box -->
+    {% endif %}
+    </div> <!--box box_left div -->
+<div class="box box_left">
+    {% if person2 %}
+    <img src="{{person2.picture_path}}" class="photo">
+        <div class="inner_box">
+        <h class='names'>
+        {% if person2.different_names %}
+        {{person2.head_first_name}}
+        {{person2.last_name}}
+        {% for member in person2.member_list %}
+        {% if member.family_role == 'Spouse'%}
+        &#38 {{member.name}}
+        {{member.last_name}}
+        {% endif %}
+        {% endfor %}
+
+
+        {% else %}
+        {{person2.head_first_name}}
+        {% for member in person2.member_list %}
+        {% if member.family_role == 'Spouse' and member.name != person2.head_first_name%}
+        {% if person2.head_first_name != None %}
+        &#38 {{member.name}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {{person2.last_name}}
+        {% endif %}
+        {% for member in person2.member_list %}
+        {% if member.family_role == 'Child' or member.family_role == 'Adult' %}
+        {% if member.name != person2.head_first_name %}
+        {{return_print_var(person2.member_list, member)}}
+        {% endif %}
+        {% endif %}
+        {% endfor%} 
+        </h>
+        {% if person2.s_address %}
+        <br>
+        {{person2.s_address}} <br>
+        {{person2.city}}, {{person2.state}} {{person2.zipcode}}
+        {% endif %}
+        <br>
+        {% if person2.home_phone_number %}
+        {{person2.home_phone_number }} (Home)
+        <br>
+        {% endif %}
+        {% for member in person2.member_list %}
+        {% if member.phone_number or member.email %}
+        {% if len(person2.member_list) > 1 %}
+        <strong>
+        {{member.name}} <br>
+        </strong>
+        {% endif %}
+        {% if member.phone_number %}
+        {{member.phone_number}} <br>
+        {% endif %}
+        {% if member.email %}
+        {{member.email}} <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+</div> <!-- inner_box div -->
+{% endif %}
+</div> <!-- box box_left -->
+
+<div class="box box_left">
+    {% if person3 %}
+    <img src="{{person3.picture_path}}" class="photo">
+        <div class="inner_box">
+        <h class='names'>
+        {% if person3.different_names %}
+        {{person3.head_first_name}}
+        {{person3.last_name}}
+        {% for member in person3.member_list %}
+        {% if member.family_role == 'Spouse'%}
+        &#38 {{member.name}}
+        {{member.last_name}}
+        {% endif %}
+        {% endfor %}
+
+
+        {% else %}
+        {{person3.head_first_name}}
+        {% for member in person3.member_list %}
+        {% if member.family_role == 'Spouse' and member.name != person3.head_first_name%}
+        {% if person3.head_first_name != None %}
+        &#38 {{member.name}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {{person3.last_name}}
+        {% endif %}
+        {% for member in person3.member_list %}
+        {% if member.family_role == 'Child' or member.family_role == 'Adult' %}
+        {% if member.name != person3.head_first_name %}
+        {{return_print_var(person3.member_list, member)}}
+        {% endif %}
+        {% endif %}
+        {% endfor%} 
+        </h>
+        {% if person3.s_address %}
+        <br>
+        {{person3.s_address}} <br>
+        {{person3.city}}, {{person3.state}} {{person3.zipcode}}
+        {% endif %}
+        <br>
+        {% if person3.home_phone_number %}
+        {{person3.home_phone_number }} (Home)
+        <br>
+        {% endif %}
+        {% for member in person3.member_list %}
+        {% if member.phone_number or member.email %}
+        {% if len(person3.member_list) > 1 %}
+        <strong>
+        {{member.name}} <br>
+        </strong>
+        {% endif %}
+        {% if member.phone_number %}
+        {{member.phone_number}} <br>
+        {% endif %}
+        {% if member.email %}
+        {{member.email}} <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+</div> <!-- inner_box div -->
+{% endif %}
+</div> <!-- box box_left -->
+</div> <!-- left_box div -->
+<div class="right_box">
+<div class="box box_right">
+    {% if person4 %}
+    <img src="{{person4.picture_path}}" class="photo">
+        <div class="inner_box">
+        <h class='names'>
+        {% if person4.different_names %}
+        {{person4.head_first_name}}
+        {{person4.last_name}}
+        {% for member in person4.member_list %}
+        {% if member.family_role == 'Spouse'%}
+        &#38 {{member.name}}
+        {{member.last_name}}
+        {% endif %}
+        {% endfor %}
+
+
+        {% else %}
+        {{person4.head_first_name}}
+        {% for member in person4.member_list %}
+        {% if member.family_role == 'Spouse' and member.name != person4.head_first_name%}
+        {% if person4.head_first_name != None %}
+        &#38 {{member.name}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {{person4.last_name}}
+        {% endif %}
+        {% for member in person4.member_list %}
+        {% if member.family_role == 'Child' or member.family_role == 'Adult' %}
+        {% if member.name != person4.head_first_name %}
+        {{return_print_var(person4.member_list, member)}}
+        {% endif %}
+        {% endif %}
+        {% endfor%} 
+        </h>
+        {% if person4.s_address %}
+        <br>
+        {{person4.s_address}} <br>
+        {{person4.city}}, {{person4.state}} {{person4.zipcode}}
+        {% endif %}
+        <br>
+        {% if person4.home_phone_number %}
+        {{person4.home_phone_number }} (Home)
+        <br>
+        {% endif %}
+        {% for member in person4.member_list %}
+        {% if member.phone_number or member.email %}
+        {% if len(person4.member_list) > 1 %}
+        <strong>
+        {{member.name}} <br>
+        </strong>
+        {% endif %}
+        {% if member.phone_number %}
+        {{member.phone_number}} <br>
+        {% endif %}
+        {% if member.email %}
+        {{member.email}} <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+</div> <!--inner_box -->
+{% endif %}
+</div> <!-- box box_right div -->
+
+<div class="box box_right">
+    {% if person5 %}
+    <img src="{{person5.picture_path}}" class="photo">
+        <div class="inner_box">
+        <h class='names'>
+        {% if person5.different_names %}
+        {{person5.head_first_name}}
+        {{person5.last_name}}
+        {% for member in person5.member_list %}
+        {% if member.family_role == 'Spouse'%}
+        &#38 {{member.name}}
+        {{member.last_name}}
+        {% endif %}
+        {% endfor %}
+
+
+        {% else %}
+        {{person5.head_first_name}}
+        {% for member in person5.member_list %}
+        {% if member.family_role == 'Spouse' and member.name != person5.head_first_name%}
+        {% if person5.head_first_name != None %}
+        &#38 {{member.name}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {{person5.last_name}}
+        {% endif %}
+        {% for member in person5.member_list %}
+        {% if member.family_role == 'Child' or member.family_role == 'Adult' %}
+        {% if member.name != person5.head_first_name %}
+        {{return_print_var(person5.member_list, member)}}
+        {% endif %}
+        {% endif %}
+        {% endfor%} 
+        </h>
+        {% if person5.s_address %}
+        <br>
+        {{person5.s_address}} <br>
+        {{person5.city}}, {{person5.state}} {{person5.zipcode}}
+        {% endif %}
+        <br>
+        {% if person5.home_phone_number %}
+        {{person5.home_phone_number }} (Home)
+        <br>
+        {% endif %}
+        {% for member in person5.member_list %}
+        {% if member.phone_number or member.email %}
+        {% if len(person5.member_list) > 1 %}
+        <strong>
+        {{member.name}} <br>
+        </strong>
+        {% endif %}
+        {% if member.phone_number %}
+        {{member.phone_number}} <br>
+        {% endif %}
+        {% if member.email %}
+        {{member.email}} <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+</div> <!-- inner_box div -->
+{% endif %}
+</div> <!-- box box_right -->
+<div class="box box_right">
+    {% if person6 %}
+    <img src="{{person6.picture_path}}" class="photo">
+        <div class="inner_box">
+        <h class='names'>
+        {% if person6.different_names %}
+        {{person6.head_first_name}}
+        {{person6.last_name}}
+        {% for member in person6.member_list %}
+        {% if member.family_role == 'Spouse'%}
+        &#38 {{member.name}}
+        {{member.last_name}}
+        {% endif %}
+        {% endfor %}
+
+
+        {% else %}
+        {{person6.head_first_name}}
+        {% for member in person6.member_list %}
+        {% if member.family_role == 'Spouse' and member.name != person6.head_first_name%}
+        {% if person6.head_first_name != None %}
+        &#38 {{member.name}}
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+        {{person6.last_name}}
+        {% endif %}
+        {% for member in person6.member_list %}
+        {% if member.family_role == 'Child' or member.family_role == 'Adult' %}
+        {% if member.name != person6.head_first_name %}
+        {{return_print_var(person6.member_list, member)}}
+        {% endif %}
+        {% endif %}
+        {% endfor%} 
+        </h>
+        {% if person6.s_address %}
+        <br>
+        {{person6.s_address}} <br>
+        {{person6.city}}, {{person6.state}} {{person6.zipcode}}
+        {% endif %}
+        <br>
+        {% if person6.home_phone_number %}
+        {{person6.home_phone_number }} (Home)
+        <br>
+        {% endif %}
+        {% for member in person6.member_list %}
+        {% if member.phone_number or member.email %}
+        {% if len(person6.member_list) > 1 %}
+        <strong>
+        {{member.name}} <br>
+        </strong>
+        {% endif %}
+        {% if member.phone_number %}
+        {{member.phone_number}} <br>
+        {% endif %}
+        {% if member.email %}
+        {{member.email}} <br>
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+</div> <!-- inner_box -->
+{% endif %}
+</div> <!-- box box_right div -->
+</div> <!-- right_box div -->
+{% endblock %}
+

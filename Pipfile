@@ -1,0 +1,15 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+breeze = "*"
+pybreezechms = {editable = true,git = "https://github.com/alexortizrosado/pyBreezeChMS"}
+jinja2 = "*"
+breezechms = {editable = true,git = "https://github.com/alexortizrosado/pyBreezeChMS"}
+
+[requires]
+python_version = "2.7"
