@@ -2,17 +2,18 @@
 from __future__ import print_function
 import sys
 import json
-import cPickle as pickle
-#import pickle
+#import cPickle as pickle
+import pickle
 import get_details
 import family
 import generate_template
+import config
 
 
 
-READ_FROM_DISK = False
-WRITE = True
-ORDERED = True
+READ_FROM_DISK = config.READ_FROM_DISK
+#WRITE = True
+#ORDERED = True
 FULL_PERSON_DICT = {}
 
 
@@ -155,33 +156,36 @@ def list_modifier(in_list):
     final_out = [inner for outer in out_list for inner in outer]
     return final_out
 
-# For testing, use json_test, not actual list
+if READ_FROM_DISK:
+    print ("we are in reading from disk mode")
+    try:
+        with open('testing_dict_out.txt', 'r') as dict_in:
+            FULL_PERSON_DICT = pickle.load(dict_in)
+        with open('testing_out.json', 'r') as json_in:
+            full_person_list = json.load(json_in)
+    except IOError:
+        print ("Looks like you need to run this with READ_TO_DISK = False, let me do that for you.""")
+        READ_FROM_DISK = False
+
 if not READ_FROM_DISK:
     people = get_people_list()
     list_of_ids = create_id_list(people)
     full_person_list = full_person_list(list_of_ids)
-
-    if WRITE:
-        with open('testing_out.json', 'w') as json_out:
-            json.dump(full_person_list, json_out)
-        with open('testing_dict_out.txt', 'w') as dict_out:
-            dict_out.write(pickle.dumps(FULL_PERSON_DICT))
+    with open('testing_out.json', 'w') as json_out:
+        json.dump(full_person_list, json_out)
+    with open('testing_dict_out.txt', 'w') as dict_out:
+        dict_out.write(pickle.dumps(FULL_PERSON_DICT))
 
 
-if READ_FROM_DISK:
-    print ("we are in reading from disk mode")
-    with open('testing_dict_out.txt', 'r') as dict_in:
-        FULL_PERSON_DICT = pickle.load(dict_in)
-        with open('testing_out.json', 'r') as json_in:
-            full_person_list = json.load(json_in)
 
 
 family_list = get_family_list(full_person_list)
 object_list = family_object_list(family_list)
-if ORDERED:
-    object_list = list_modifier(object_list)
-    sys.stdout.flush()
-    print(str(len(object_list)) + " entries in directory")
+
+
+object_list = list_modifier(object_list)
+sys.stdout.flush()
+print(str(len(object_list)) + " entries in directory")
 
 template_dict_list = template_dict_caller(object_list)
 html_output = ''
@@ -191,10 +195,8 @@ pre_info = ('<!DOCTYPE html> \n <html> \n <link rel="stylesheet" type="text/css"
             ' href="./styles.css"> <body>')
 post_info = '</body></html>'
 final_output = pre_info + html_output + post_info
-if ORDERED:
-    with open('ordered_out.html', 'w') as out_html_file:
-        out_html_file.write(final_output)
-else:
-    with open('out.html', 'w') as out_html_file:
-        out_html_file.write(final_output)
+#if ORDERED:
+with open('ordered_out.html', 'w') as out_html_file:
+    out_html_file.write(final_output)
+
 
