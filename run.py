@@ -4,6 +4,7 @@ import sys
 import json
 #import cPickle as pickle
 import pickle
+import breeze
 import get_details
 import family
 import generate_template
@@ -19,12 +20,14 @@ FULL_PERSON_DICT = {}
 
 def get_people_list():
     """One call"""
+
     try:
         print("Making first call ...")
         list_of_people = get_details.get_people_list()
         return list_of_people
-    except:
+    except breeze.breeze.BreezeError:
         print("Looks like there is a problem with your connection to breeze, check connect.py")
+        raise breeze.breeze.BreezeError
 
 
 def create_id_list(json_people):
@@ -47,8 +50,9 @@ def full_person_list(id_list):
         #print ("working on number ", inc, " out of ", len(id_list))
         try:
             person_details = get_details.get_person_details(person_id)
-        except:
-            print("There was a problem making the call to breeze")
+        except breeze.breeze.BreezeError:
+            print("Looks like there is a problem with your connection to breeze, check connect.py")
+            raise breeze.breeze.BreezeError
         out_list.append(person_details)
         FULL_PERSON_DICT[person_id] = person_details
         inc += 1
@@ -97,7 +101,8 @@ def is_in_booklet(person):
     return in_booklet
 
 def family_object_list(in_family_list):
-    """One call for each familiy, and one for each person in family"""
+    """One call for each familiy, and one for each person in family. This function creates a list
+    of all the people in a family."""
     out_list = []
     for family_tuple in in_family_list:
         family_json = FULL_PERSON_DICT[family_tuple[2]]

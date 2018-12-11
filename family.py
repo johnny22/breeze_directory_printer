@@ -56,6 +56,7 @@ class family_details(object):
         for member in self.member_list:
             output.append(str(member))
         return str(output)
+
     def add_address(self):
         """if address isn't private, and it exists, this will add it to the object."""
         display_address = True
@@ -137,6 +138,7 @@ class family_details(object):
     def get_breeze_picture_path(self):
         """Gets the picture path that breeze has, allowing you to download
         the picutres and then use them."""
+        # Does this need the folder provided?
         photo_name = str(self.head_first_name + '_' + self.last_name)
         #list_of_photos = []
         with open('photo_list.json', 'r') as in_photo:
