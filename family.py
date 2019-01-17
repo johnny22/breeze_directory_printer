@@ -39,7 +39,7 @@ class family_details(object):
             self.head_first_name = in_json['first_name']
 
         self.last_name = in_json['last_name']
-        self.picture_path = "./Final_images/gray.png"
+        self.picture_path = "./Final_images/gray.jpg"
         self.get_all_members()
         self.get_picture_path()
         self.add_phone_number()
@@ -86,7 +86,7 @@ class family_details(object):
         #new_member = person(get_person.get_person_details(new_member_id))
         new_member = person(self.full_person_dict[new_member_id])
         if  new_member.role in ('1', '2', '47') or new_member.in_booklet:
-            #self.member_list.append((new_member, var))
+            # self.member_list.append((new_member, var))
             self.member_list.append(new_member)
 
     def get_all_members(self):
@@ -105,9 +105,9 @@ class family_details(object):
         for picture in self.image_files:
             if self.last_name in picture:
                 possible_list.append(picture)
-        #print (possible_list)
+        # print (possible_list)
         if len(possible_list) > 1:
-            #if there are more than one family with the last name
+            # if there are more than one family with the last name
             for pic in possible_list:
                 if self.head_first_name in pic:
                     self.picture_path = self.image_folder + '/' + pic
@@ -115,25 +115,25 @@ class family_details(object):
         elif len(possible_list) == 1:
             pic_title = str(possible_list[0]).split('.')
             if self.head_first_name in possible_list[0]:
-                #or ' ' not in possible_list[0]:
+                # or ' ' not in possible_list[0]:
                 self.picture_path = self.image_folder +'/' + possible_list[0]
             elif self.last_name == pic_title[0]:
                 self.picture_path = self.image_folder +'/' + possible_list[0]
-            #if ' ' in possible_list[0] and self.last_name == possible_list[0]:
+            # if ' ' in possible_list[0] and self.last_name == possible_list[0]:
             #    print( 'do we get here?')
             #    self.picture_path = self.image_folder + '/' + possible_list[0]
         else:
-            #print ('len = 0', picture)
-            self.picture_path = self.image_folder + '/gray.png'
+            # print ('len = 0', picture)
+            self.picture_path = self.image_folder + '/gray.jpg'
 
         self.picture_path = self.picture_path.replace(' ', '%20')
-        #print(self.picture_path)
+        # print(self.picture_path)
 
     def get_breeze_picture_path(self):
         """Gets the picture path that breeze has, allowing you to download
         the picutres and then use them."""
         photo_name = str(self.head_first_name + '_' + self.last_name)
-        #list_of_photos = []
+        # list_of_photos = []
         with open('photo_list.json', 'r') as in_photo:
             photo_json = json.load(in_photo)
             try:
@@ -218,10 +218,10 @@ class person(object):
 
     def assign_email_address(self):
         """Assigns email address based on in_json."""
+        self.email = None
         if '1954637511' in self.in_json['details']:
-            self.email = self.in_json['details']['1954637511'][0]['address']
-        else:
-            self.email = None
+            if self.in_json['details']['1954637511'][0]['is_private'] == '0':
+                self.email = self.in_json['details']['1954637511'][0]['address']
 
     def assign_family_role(self):
         """Assigns family role based on in_json."""
@@ -231,7 +231,7 @@ class person(object):
                     self.family_role = member['role_name']
         else:
             self.familiy_role = None
-        #print(self.family_role)
+        # print(self.family_role)
 
 
     def __repr__(self):
@@ -241,7 +241,7 @@ class person(object):
 
 
 
-#def create_full_family_list(family_list):
+# def create_full_family_list(family_list):
 #    """takes list [(lastname, family_id), ()] and creates family object.
 #        I think should have head name and details, spouse name and details, and children
 #        name(s) and details, address, last name, home phone. needs to have access to
