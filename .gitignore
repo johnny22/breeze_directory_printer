@@ -1,6 +1,7 @@
 connect.py
 *.pyc
-Final_images/
+*.swp
+Final_images*/
 notes.txt
 ordered_out.html
 people.json
