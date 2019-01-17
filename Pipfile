@@ -10,6 +10,10 @@ breeze = "*"
 pybreezechms = {editable = true,git = "https://github.com/alexortizrosado/pyBreezeChMS"}
 jinja2 = "*"
 breezechms = {editable = true,git = "https://github.com/alexortizrosado/pyBreezeChMS"}
+pytest = "*"
+bandit = "*"
+flake8 = "*"
+pillow = "*"
 
 [requires]
 python_version = "2.7"
