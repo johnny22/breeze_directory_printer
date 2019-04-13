@@ -4,10 +4,11 @@ import json
 import connect
 
 def get_people_list(tag=None, details=False):
+#'861044'
     """Makes a request to breeze and returns list of all people."""
     if tag:
         #print (tag)
-        people = connect.breeze_api.get_people(tag)
+        people = connect.breeze_api.get_people(tag=tag, details=True)
         return people
 
     else:
@@ -25,6 +26,7 @@ def get_person_details(person_id):
 
 if __name__ == "__main__":
     PEOPLE_LIST = get_people_list(details=True)
+    #PERSON = get_person_details('8238180')
     with open('people.json', 'w') as out_file:
         json.dump(PEOPLE_LIST, out_file)
 
