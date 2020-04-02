@@ -29,7 +29,9 @@ body {
 .box {
     width: 500px;
     height: 235px;
-   /* border: 1px solid blue; */
+
+    /*border: 1px solid blue; */
+
     margin: 0;
     padding: 0;
 }
@@ -38,8 +40,10 @@ body {
     width: 475px;
     height: 710px;
     left: 0;
-    /*border: dotted;
-    border-width: 1px; */
+/*
+    border: dotted;
+    border-width: 1px;
+*/
     margin: 0;
     padding-right: 25px;
 }
@@ -51,7 +55,8 @@ body {
     right: 0;
     margin-left: 0;
     padding-left: 25px;
-    /*border: 1px dotted blue; */
+
+   /* border: 1px dotted blue; */
 }
 
 .box_left {
@@ -72,6 +77,8 @@ body {
 .photo {
     width: 250px;
     height: 195px;
+    border: 2px;
+    border-style: groove;
     /*position: absolute;
     bottom: 0; */
     /*text-indent: 10%;
