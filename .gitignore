@@ -2,6 +2,7 @@ connect.py
 *.pyc
 *.swp
 Final_images*/
+Images_from_office*/
 notes.txt
 ordered_out.html
 people.json
