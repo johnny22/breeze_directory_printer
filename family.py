@@ -103,13 +103,19 @@ class family_details(object):
         """Pretty sure this is what we are going to use, but I think it gets the picture path in some scenarios."""
         possible_list = []
         for picture in self.image_files:
+            #if self.last_name == picture.rsplit('.', 1)[0]:
             if self.last_name in picture:
-                possible_list.append(picture)
-        # print (possible_list)
+                if self.last_name == picture.rsplit('.', 1)[0] or ' ' in picture:
+                    possible_list.append(picture)
+
+
+        # This deals with multiple familes with the same last name 
         if len(possible_list) > 1:
-            # if there are more than one family with the last name
+            #print (pic.rsplit('.', 1)[0])
+            print (possible_list)
+            print (self.last_name + ' ' + self.head_first_name)
             for pic in possible_list:
-                if self.head_first_name in pic:
+                if self.last_name + ' ' + self.head_first_name == pic.rsplit('.', 1)[0]:
                     self.picture_path = self.image_folder + '/' + pic
 
         elif len(possible_list) == 1:
