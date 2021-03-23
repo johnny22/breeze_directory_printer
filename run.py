@@ -137,7 +137,7 @@ def template_dict_caller(full_list):
     else:
         add_var = 1
     out_list = []
-    for temp_dict in range(0, number_of_dicts+add_var):
+    for temp_dict in range(0, int(number_of_dicts+add_var)):
         out_list.append(create_template_dict(full_list[0:6]))
         full_list = full_list[6:]
     return out_list
@@ -166,7 +166,7 @@ def list_modifier(in_list):
 if READ_FROM_DISK:
     print ("we are in reading from disk mode")
     try:
-        with open('testing_dict_out.txt', 'r') as dict_in:
+        with open('testing_dict_out.txt', 'rb') as dict_in:
             FULL_PERSON_DICT = pickle.load(dict_in)
         with open('testing_out.json', 'r') as json_in:
             full_person_list = json.load(json_in)
@@ -180,7 +180,7 @@ if not READ_FROM_DISK:
     full_person_list = full_person_list(list_of_ids)
     with open('testing_out.json', 'w') as json_out:
         json.dump(full_person_list, json_out)
-    with open('testing_dict_out.txt', 'w') as dict_out:
+    with open('testing_dict_out.txt', 'wb') as dict_out:
         dict_out.write(pickle.dumps(FULL_PERSON_DICT))
 
 

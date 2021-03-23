@@ -9,7 +9,7 @@ body {
     height: 710px;
     margin: 0;
     padding-top: 60px;
-    font-size: 9pt;
+    font-size: 8pt;
     /*border: 1px solid red; */
 
 }
@@ -24,6 +24,7 @@ body {
         page-break-after: always;
     }
 }
+
 
 
 .box {
