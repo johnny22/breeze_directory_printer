@@ -8,7 +8,7 @@ import os
 CROP_RATIO = 10 
 WIDTH = 1700
 HEIGHT = 1326 
-INPUT_DIRECTORY = "9-30_pictures"
+INPUT_DIRECTORY = "Photos Cropped 2020"
 #INPUT_DIRECTORY = "Photo_work"
 OUTPUT_DIRECTORY = "Resized_photos" 
 pic_list = os.listdir(INPUT_DIRECTORY)

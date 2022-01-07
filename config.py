@@ -4,7 +4,7 @@
 # save the necessary infomation. Then change READ_FROM_DISK  to True. Now you can edit
 # the template files and run the script again to check. The script will read the
 # informatin from disk, so it should be near instantaneous.
-READ_FROM_DISK = True
+READ_FROM_DISK = False
 #READ_FROM_DISK = False
 
 
